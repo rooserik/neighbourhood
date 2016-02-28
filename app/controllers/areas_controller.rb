@@ -5,4 +5,9 @@ class AreasController < ApplicationController
       areas: Area.order(id: :desc)
     }
   end
+
+  def new
+    render json:{area: Area.new}
+  end
+  
 end

@@ -61,9 +61,6 @@ RSpec.describe ReviewsController, type: :routing do
     it "routes to #delete reviews" do
       area
       expect(:delete => "/areas/1/reviews/1").to route_to("reviews#destroy", area_id:'1',id: '1')
-
     end
-
-
   end
 end
