@@ -11,6 +11,20 @@ class ReviewsController < ApplicationController
     render json:{task: @area.reviews.new}
   end
 
+  def create
+    review=Review.new(review_params)
+    review.area=@area
+
+    if review.save
+    render json:{review: review}
+    else
+      render json: {
+        message: "Sorry, review could not be created",
+        errors: review.errors
+      }
+    end
+  end
+
   private
 
   def set_area
