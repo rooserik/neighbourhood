@@ -16,4 +16,19 @@ area = FactoryGirl.create(:area)
       expect(response).to be_success
     end
   end
+
+  describe '#create'do
+    it "creates area" do
+      expect{post :create, :format => :json, area: FactoryGirl.attributes_for(:area)}.to change{Area.count}.by(1)
+    end
+  end
+
+  describe '#edit' do
+    it "gets edit_area" do
+      area
+      get :edit, :format => :json, id: area.id
+      expect(response).to be_success
+    end
+  end
+
 end

@@ -9,5 +9,24 @@ class AreasController < ApplicationController
   def new
     render json:{area: Area.new}
   end
-  
+
+  def create
+    if area=Area.create(area_params)
+    render json:{area: area}
+    else
+      render json: {
+        message: "Sorry, area could not be created",
+        errors: area.errors
+      }
+    end
+  end
+
+  def edit
+    render json:{area: Area.find(params[:id])}
+  end
+
+  private
+  def area_params
+    params.require(:area).permit(:name, :description)
+  end
 end
