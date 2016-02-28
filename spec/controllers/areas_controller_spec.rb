@@ -31,4 +31,30 @@ area = FactoryGirl.create(:area)
     end
   end
 
+  describe '#update'do
+    it "updates area" do
+      area
+      put :update, :format => :json, id: area.id, :area => { :name => "new name"}
+      area.reload
+      expect(area.name).to eq("new name")
+    end
+  end
+
+  describe '#delete'do
+    it "deletes area"do
+      area
+      expect{delete :destroy, :format => :json, id: area.id}.to change{Area.count}.by(-1)
+    end
+  end
+
+
+  describe '#show'do
+    it "shows area"do
+      area
+      get :show, :format => :json, id: area.id
+      expect(response).to be_success
+    end
+  end
+
+  
 end
