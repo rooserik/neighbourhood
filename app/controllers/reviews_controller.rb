@@ -25,11 +25,34 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def edit
+    review=@area.reviews.find(params[:id])
+    render json:{review: review}
+  end
+
+  def update
+    if review=@area.reviews.find(params[:id])
+    render json:{review: review.update(review_params)}
+    else
+      render json: {
+        message:"Sorry, review could not be edited",
+        errors: review.errors
+      }
+    end
+  end
+
+  def destroy
+    review=@area.reviews.find(params[:id])
+    review.destroy
+    render json: { destroyed: true }
+  end
+
   private
 
   def set_area
     @area=Area.find(params[:area_id])
   end
+  
   def review_params
     params.require(:review).permit(:story, :writer, :area_id)
   end

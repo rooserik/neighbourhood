@@ -36,4 +36,28 @@ RSpec.describe ReviewsController, type: :controller do
       expect(FactoryGirl.build(:review, area_id: nil)).to_not be_valid
     end
   end
+
+
+  describe '#edit' do
+    it "gets edit_review" do
+      get :edit, :format => :json, id: review.id, :area_id => review.area.to_param
+      expect(response).to be_success
+    end
+
+  end
+
+  describe '#update'do
+    it "updates review" do
+      put :update, :format => :json, id: review.id, :review => { :story => "new story"}, :area_id => review.area.to_param
+      review.reload
+      expect(review.story).to eq("new story")
+    end
+
+  end
+
+  describe '#delete'do
+    it "deletes review"do
+      expect{delete :destroy, :format => :json, id: review.id, :area_id => review.area.to_param}.to change{Review.count}.by(-1)
+    end
+  end
 end
