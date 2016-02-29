@@ -4,6 +4,7 @@ class CreateReviews < ActiveRecord::Migration
       t.text :story
       t.string :writer
       t.references :area, index: true, foreign_key: true
+      t.integer :rating
 
       t.timestamps null: false
     end

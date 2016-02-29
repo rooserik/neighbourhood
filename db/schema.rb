@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20160227151001) do
     t.text     "story"
     t.string   "writer"
     t.integer  "area_id"
+    t.integer  "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
